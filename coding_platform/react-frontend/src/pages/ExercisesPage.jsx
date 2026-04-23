@@ -26,7 +26,6 @@ export default function ExercisesPage() {
         fetch(`${process.env.REACT_APP_API_URL}/api/exercises?subjectId=${subjectId}`).then(res => res.json()),
         fetch(`${process.env.REACT_APP_API_URL}/api/progress/${userId}`).then(res => res.json())
     ]).then(([exercisesData, progressData]) => {
-        // Merge progress into exercises
         const exercisesWithProgress = exercisesData.map(ex => {
             const progress = progressData.find(p => p.exerciseId === ex.id);
             return {
@@ -42,7 +41,7 @@ export default function ExercisesPage() {
         console.error('Failed to fetch data:', err);
         setLoading(false);
     });
-}, []);
+}, [subjectId, userId]);
 
   const completed = exercises.filter(ex => ex.status === 'completed').length;
   const started = exercises.filter(ex => ex.status === 'started').length;

@@ -20,7 +20,7 @@ export default function ExerciseCard({ id, title, subtitle, difficulty, status, 
   };
 
   const handleAssign = async (lessonId) => {
-    await fetch('${process.env.REACT_APP_API_URL}/api/lessons/exercise', {
+    await fetch(`${process.env.REACT_APP_API_URL}/api/lessons/exercise`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ lessonId, exerciseId: id, dueDate: dueDates[lessonId] || null })

@@ -8,7 +8,7 @@ export default function LeaderboardPage() {
   const currentUserId = user?.userId;
 
   useEffect(() => {
-    fetch('${process.env.REACT_APP_API_URL}/api/leaderboard')
+    fetch(`${process.env.REACT_APP_API_URL}/api/leaderboard`)
       .then(res => res.json())
       .then(data => {
         setLeaderboard(data);

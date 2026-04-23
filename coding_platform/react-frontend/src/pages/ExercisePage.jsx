@@ -47,7 +47,7 @@ export default function ExercisePage() {
   setOutput('Submitting your code for testing...');
   
   try {
-    const response = await fetch('${process.env.REACT_APP_API_URL}/api/submissions', {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/submissions`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
