@@ -14,7 +14,7 @@ export default function ExercisePage() {
   const userId = user?.userId;
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/exercises/${id}`)
+    fetch(`${process.env.REACT_APP_API_URL}/api/exercises/${id}`)
       .then(res => res.json())
       .then(data => {
         setExercise(data);
@@ -47,7 +47,7 @@ export default function ExercisePage() {
   setOutput('Submitting your code for testing...');
   
   try {
-    const response = await fetch('http://localhost:8080/api/submissions', {
+    const response = await fetch('${process.env.REACT_APP_API_URL}/api/submissions', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

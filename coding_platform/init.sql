@@ -116,9 +116,9 @@ CREATE INDEX idx_lesson_students_user ON lesson_students(user_id);
 -- ============================================
 
 INSERT INTO users (email, password_hash, username, role) VALUES
-('teacher@test.com', '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', 'jteacher', 'teacher'),
-('student1@test.com', '$2b$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'alice', 'student'),
-('student2@test.com', '$2b$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'bob', 'student');
+('teacher@test.com', '$2a$12$t91ukyNTGUvBCfOzc6vODuxYEymWEEK7DyhOq0XpaNeZIQgovL5rq', 'jteacher', 'teacher'),
+('student1@test.com', '$2a$12$EBNr8.0prfa86oNuwWWpAuGuJpPEgVeSCRJlRNBGMOgNh95ul4OYW', 'alice', 'student'),
+('student2@test.com', '$2a$12$EBNr8.0prfa86oNuwWWpAuGuJpPEgVeSCRJlRNBGMOgNh95ul4OYW', 'bob', 'student');
 
 INSERT INTO subjects (name, code, description) VALUES
 ('Data Structures', 'DS101',  'Arrays, Lists, Trees, Graphs'),

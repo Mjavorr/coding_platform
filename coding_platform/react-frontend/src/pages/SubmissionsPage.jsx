@@ -12,7 +12,7 @@ export default function SubmissionsPage() {
   const userId = user?.userId;
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/submissions/user/${userId}/exercise/${exerciseId}`)
+    fetch(`${process.env.REACT_APP_API_URL}/api/submissions/user/${userId}/exercise/${exerciseId}`)
       .then(res => res.json())
       .then(data => {
         setSubmissions(data);

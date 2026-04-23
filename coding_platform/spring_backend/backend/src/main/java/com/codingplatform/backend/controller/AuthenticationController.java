@@ -4,6 +4,7 @@ import com.codingplatform.backend.model.User;
 import com.codingplatform.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import java.util.*;
 
 @RestController
@@ -25,10 +26,9 @@ public class AuthenticationController {
         }
 
         User user = userOpt.get();
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-        // For now just check if password matches "password123"
-        // When we add proper auth later we'll use bcrypt here
-        if (!password.equals("password123")) {
+        if (!encoder.matches(password, user.getPassword())) {
             return Map.of("success", false, "error", "Invalid email or password");
         }
 

@@ -23,8 +23,8 @@ export default function ExercisesPage() {
 
   useEffect(() => {
     Promise.all([
-        fetch(`http://localhost:8080/api/exercises?subjectId=${subjectId}`).then(res => res.json()),
-        fetch(`http://localhost:8080/api/progress/${userId}`).then(res => res.json())
+        fetch(`${process.env.REACT_APP_API_URL}/api/exercises?subjectId=${subjectId}`).then(res => res.json()),
+        fetch(`${process.env.REACT_APP_API_URL}/api/progress/${userId}`).then(res => res.json())
     ]).then(([exercisesData, progressData]) => {
         // Merge progress into exercises
         const exercisesWithProgress = exercisesData.map(ex => {

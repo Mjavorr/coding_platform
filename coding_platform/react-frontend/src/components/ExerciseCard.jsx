@@ -12,15 +12,15 @@ export default function ExerciseCard({ id, title, subtitle, difficulty, status, 
 
   const fetchLessonData = async () => {
     const [lessonsRes, assignedRes] = await Promise.all([
-      fetch(`http://localhost:8080/api/lessons/teacher/${user.userId}`),
-      fetch(`http://localhost:8080/api/lessons/exercise/${id}`)
+      fetch(`${process.env.REACT_APP_API_URL}/api/lessons/teacher/${user.userId}`),
+      fetch(`${process.env.REACT_APP_API_URL}/api/lessons/exercise/${id}`)
     ]);
     setLessons(await lessonsRes.json());
     setAssignedLessonIds(await assignedRes.json());
   };
 
   const handleAssign = async (lessonId) => {
-    await fetch('http://localhost:8080/api/lessons/exercise', {
+    await fetch('${process.env.REACT_APP_API_URL}/api/lessons/exercise', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ lessonId, exerciseId: id, dueDate: dueDates[lessonId] || null })
@@ -29,7 +29,7 @@ export default function ExerciseCard({ id, title, subtitle, difficulty, status, 
   };
 
   const handleRemove = async (lessonId) => {
-    await fetch(`http://localhost:8080/api/lessons/${lessonId}/exercise/${id}`, { method: 'DELETE' });
+    await fetch(`${process.env.REACT_APP_API_URL}/api/lessons/${lessonId}/exercise/${id}`, { method: 'DELETE' });
     setAssignedLessonIds(prev => prev.filter(lid => lid !== lessonId));
   };
 
@@ -65,7 +65,7 @@ export default function ExerciseCard({ id, title, subtitle, difficulty, status, 
     }
     setExpandedLesson(lessonId);
     if (!studentProgress[lessonId]) {
-      const res = await fetch(`http://localhost:8080/api/lessons/${lessonId}/progress/${id}`);
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/lessons/${lessonId}/progress/${id}`);
       const data = await res.json();
     setStudentProgress(prev => ({ ...prev, [lessonId]: data }));
     }
