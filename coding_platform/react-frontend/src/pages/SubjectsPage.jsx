@@ -9,12 +9,11 @@ export default function SubjectsPage() {
 
   const user = JSON.parse(localStorage.getItem('user'));
 
-  useEffect(() => {
-    if (!user) {
-      navigate('/');
-      return;
-    }
+  if (!user) {
+    navigate('/');
+  }
 
+  useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/api/subjects`)
       .then(res => res.json())
       .then(data => {
