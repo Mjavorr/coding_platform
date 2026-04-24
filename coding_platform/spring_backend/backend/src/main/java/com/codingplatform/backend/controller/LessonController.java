@@ -10,7 +10,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api/lessons")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "${FRONTEND_URL}")
 public class LessonController {
 
     @Autowired private LessonRepository lessonRepository;

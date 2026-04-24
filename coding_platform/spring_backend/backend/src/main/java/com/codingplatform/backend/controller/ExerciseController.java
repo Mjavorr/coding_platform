@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/exercises")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "${FRONTEND_URL}")
 public class ExerciseController {
 
     @Autowired

@@ -9,7 +9,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api/progress")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "${FRONTEND_URL}")
 public class UserProgressController {
 
     @Autowired

@@ -12,7 +12,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api/submissions")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "${FRONTEND_URL}")
 public class SubmissionController {
 
     @Autowired

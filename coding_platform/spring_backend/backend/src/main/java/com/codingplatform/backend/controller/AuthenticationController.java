@@ -9,7 +9,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "${FRONTEND_URL}")
 public class AuthenticationController {
     @Autowired
     private UserRepository userRepository;

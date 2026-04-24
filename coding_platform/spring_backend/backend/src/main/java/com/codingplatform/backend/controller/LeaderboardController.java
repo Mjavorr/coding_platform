@@ -10,7 +10,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api/leaderboard")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "${FRONTEND_URL}")
 public class LeaderboardController {
 
     @Autowired
