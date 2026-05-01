@@ -5,6 +5,7 @@ import com.codingplatform.backend.model.LessonExerciseId;
 import com.codingplatform.backend.repository.ExerciseRepository;
 import com.codingplatform.backend.repository.LessonExerciseRepository;
 import com.codingplatform.backend.repository.LessonStudentRepository;
+import com.codingplatform.backend.repository.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +24,8 @@ public class ExerciseController {
     private LessonExerciseRepository lessonExerciseRepository;
     @Autowired
     private LessonStudentRepository lessonStudentRepository;
+    @Autowired
+    private SubjectRepository subjectRepository;
 
     @GetMapping("/{id}")
     public Exercise getExerciseById(@PathVariable Long id) {
@@ -42,11 +45,11 @@ public class ExerciseController {
             Map<String, Object> map = new HashMap<>();
             map.put("id",          exercise.getId());
             map.put("title",       exercise.getTitle());
-            map.put("description", exercise.getDescription());
-            map.put("starterCode", exercise.getStarterCode());
-            map.put("isPublished", exercise.getIsPublished());
             map.put("subjectId",   exercise.getSubjectId());
             map.put("totalPoints", exercise.getTotalPoints());
+            subjectRepository.findById(exercise.getSubjectId()).ifPresent(s -> {
+                map.put("subjectName", s.getName());
+            });
 
             // Nájdi dueDate pre tohto študenta
             if (userId != null) {
