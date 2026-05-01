@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function ExerciseCard({ id, title, subtitle, difficulty, status, points, user }) {
+export default function ExerciseCard({ id, title, subtitle, dueDate, status, points, user }) {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [lessons, setLessons] = useState([]);
@@ -82,9 +82,11 @@ export default function ExerciseCard({ id, title, subtitle, difficulty, status, 
           </div>
         </div>
         <p className="text-sm text-gray-400 mb-2">{subtitle}</p>
-        <span className={`text-xs font-medium px-2 py-1 rounded border text-gray-400 bg-gray-800 border-gray-600`}>
-          {difficulty}
-        </span>
+        {dueDate && (
+          <span className="text-xs font-medium px-2 py-1 rounded border text-orange-400 bg-orange-900 border-orange-700">
+             Due: {new Date(dueDate).toLocaleDateString()}
+             </span>
+            )}
       </div>
      <div className="flex gap-2 ml-4">
         {user?.role === 'teacher' && (

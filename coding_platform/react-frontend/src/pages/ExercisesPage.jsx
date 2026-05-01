@@ -23,7 +23,7 @@ export default function ExercisesPage() {
 
   useEffect(() => {
     Promise.all([
-        fetch(`${process.env.REACT_APP_API_URL}/api/exercises?subjectId=${subjectId}`).then(res => res.json()),
+        fetch(`${process.env.REACT_APP_API_URL}/api/exercises?subjectId=${subjectId}&userId=${userId}`).then(res => res.json()),
         fetch(`${process.env.REACT_APP_API_URL}/api/progress/${userId}`).then(res => res.json())
     ]).then(([exercisesData, progressData]) => {
         const exercisesWithProgress = exercisesData.map(ex => {
@@ -129,7 +129,7 @@ export default function ExercisesPage() {
                 id={exercise.id}
                 title={exercise.title}
                 subtitle={exercise.subjectName}
-                difficulty={exercise.difficulty}
+                dueDate={exercise.dueDate}
                 status={exercise.status}
                 points={exercise.totalPoints}
                 user={user}
