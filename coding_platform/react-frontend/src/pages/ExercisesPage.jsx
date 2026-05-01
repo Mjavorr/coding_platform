@@ -64,7 +64,7 @@ export default function ExercisesPage() {
 
   return (
     <div className="min-h-screen bg-gray-800">
-      <Navbar title="Coding Practice Platform" centerTitle={true} showBack={true} backTo="/subjects" showLeaderboard={true}/>
+      <Navbar title={subjectId ? (exercises[0]?.subjectName || 'Exercises') : 'Coding Practice Platform'} showBack={true} backTo="/subjects" showLeaderboard={true}/>
 
       <div className="max-w-6xl mx-auto px-4">
         {/* Stats Bar */}

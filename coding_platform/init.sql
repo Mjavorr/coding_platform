@@ -126,9 +126,9 @@ INSERT INTO subjects (name, code, description) VALUES
 ('Operating Systems', 'OS301', 'Processes, Memory, File Systems');
 
 INSERT INTO lessons (subject_id, teacher_id, day_of_week, start_time, semester, year) VALUES
-(1, 1, 1, '09:00', 'winter', 2024),
-(1, 1, 3, '09:00', 'winter', 2024),
-(2, 1, 2, '14:00', 'winter', 2024);
+(1, 1, 1, '09:00', 'winter', 2026),
+(1, 1, 3, '09:00', 'winter', 2026),
+(2, 1, 2, '14:00', 'winter', 2026);
 
 INSERT INTO exercises (subject_id, title, description, starter_code, is_published) VALUES
 (1,
