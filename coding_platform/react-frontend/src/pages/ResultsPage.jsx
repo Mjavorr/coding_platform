@@ -61,7 +61,7 @@ export default function ResultsPage() {
             }
         })
         .catch(err => console.error('Failed to load results:', err));
-  }, [id, submissionI, maxPoints]);
+  }, [id, submissionId, maxPoints]);
 
   if (!results) {
     return (
