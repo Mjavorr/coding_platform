@@ -1,40 +1,59 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import Navbar from '../components/NavBar';
 import TestResultCard from '../components/TestResultCard';
 
 export default function ResultsPage() {
   const { id } = useParams();
+  const [searchParams] = useSearchParams();
+  const submissionId = searchParams.get('submissionId');
+  const maxPoints = parseInt(searchParams.get('maxPoints') || '0');
   const navigate = useNavigate();
   const [results, setResults] = useState(null);
 
   useEffect(() => {
-    // Read results from localStorage
+    if (submissionId) {
+      fetch(`${process.env.REACT_APP_API_URL}/api/submissions/${submissionId}`)
+        .then(res => res.json())
+        .then(detail => {
+          const totalPoints = detail.testResults.reduce((sum, t) => sum + (t.pointsEarned || 0), 0);
+          setResults({
+            summary: {
+              totalPoints,
+              maxPoints,
+              percentage: maxPoints > 0 ? Math.round(totalPoints * 100 / maxPoints) : 0,
+              passed: detail.testResults.filter(t => t.status === 'passed').length,
+              failed: detail.testResults.filter(t => t.status !== 'passed').length,
+            },
+            results: detail.testResults
+          });
+        });
+      return;
+    }
     const storedResults = localStorage.getItem('testResults');
     if (storedResults) {
       setResults(JSON.parse(storedResults));
+      localStorage.removeItem('testResults');
       return;
     }
-
     const user = JSON.parse(localStorage.getItem('user'));
-    fetch(`http://localhost:8080/api/submissions/user/${user?.userId}/exercise/${id}`)
+    fetch(`${process.env.REACT_APP_API_URL}/api/submissions/user/${user?.userId}/exercise/${id}`)
         .then(res => res.json())
         .then(data => {
             if (data && data.length > 0) {
                 const latest = data[0];
-                // Načítaj detaily posledného submitu
-                fetch(`http://localhost:8080/api/submissions/${latest.id}`)
+                fetch(`${process.env.REACT_APP_API_URL}/api/submissions/${latest.id}`)
                     .then(res => res.json())
                     .then(detail => {
+                      const totalPoints = detail.testResults.reduce((sum, t) => sum + (t.pointsEarned || 0), 0);
+                      const maxPoints = latest.maxPoints || 0;
                         setResults({
                             summary: {
-                                totalPoints: latest.totalPoints,
-                                maxPoints: latest.maxPoints,
-                                percentage: latest.maxPoints > 0 
-                                    ? Math.round(latest.totalPoints * 100 / latest.maxPoints) 
-                                    : 0,
-                                passed: detail.testResults.filter(t => t.status === 'passed').length,
-                                failed: detail.testResults.filter(t => t.status !== 'passed').length,
+                              totalPoints,
+                              maxPoints,
+                              percentage: maxPoints > 0 ? Math.round(totalPoints * 100 / maxPoints) : 0,
+                              passed: detail.testResults.filter(t => t.status === 'passed').length,
+                              failed: detail.testResults.filter(t => t.status !== 'passed').length,
                             },
                             results: detail.testResults
                         });
@@ -42,7 +61,7 @@ export default function ResultsPage() {
             }
         })
         .catch(err => console.error('Failed to load results:', err));
-  }, [id]);
+  }, [id, submissionId]);
 
   if (!results) {
     return (

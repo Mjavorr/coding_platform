@@ -46,7 +46,7 @@ export default function SubmissionsPage() {
             {submissions.map((sub, i) => (
               <div
                 key={sub.id}
-                onClick={() => navigate(`/results/${exerciseId}?submissionId=${sub.id}`)}
+                onClick={() => navigate(`/results/${exerciseId}?submissionId=${sub.id}&maxPoints=${sub.maxPoints}`)}
                 className="bg-gray-700 rounded-lg border border-gray-600 p-5 cursor-pointer hover:bg-gray-600 transition"
               >
                 <div className="flex items-center justify-between">
