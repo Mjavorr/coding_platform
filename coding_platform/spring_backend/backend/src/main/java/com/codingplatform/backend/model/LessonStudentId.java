@@ -9,6 +9,7 @@ public class LessonStudentId implements Serializable {
     private Long lessonId;
     private Long userId;
 
+    public LessonStudentId() {}
     public LessonStudentId(Long lessonId, Long userId) {
         this.lessonId = lessonId;
         this.userId = userId;
