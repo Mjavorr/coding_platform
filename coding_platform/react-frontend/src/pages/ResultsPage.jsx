@@ -7,6 +7,7 @@ export default function ResultsPage() {
   const { id } = useParams();
   const [searchParams] = useSearchParams();
   const submissionId = searchParams.get('submissionId');
+  const subjectId = searchParams.get('subjectId');
   const maxPoints = parseInt(searchParams.get('maxPoints') || '0');
   const navigate = useNavigate();
   const [results, setResults] = useState(null);
@@ -140,7 +141,7 @@ export default function ResultsPage() {
             ← Edit Your Code
           </button>
           <button
-            onClick={() => navigate('/exercises')}
+            onClick={() => navigate(subjectId ? `/exercises?subjectId=${subjectId}` : '/subjects')}
             className="bg-gray-600 text-white py-4 rounded-lg hover:bg-gray-500 transition font-medium text-lg"
           >
             Choose Another Exercise
