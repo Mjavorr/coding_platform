@@ -82,7 +82,7 @@ export default function LeaderboardPage() {
                 key={user.userId}
                 className={`px-6 py-4 grid grid-cols-4 gap-4 items-center transition ${
                   user.userId === currentUserId
-                    ? 'bg-blue-900 bg-opacity-30 border-l-4 border-blue-500'
+                    ? 'bg-blue-900 bg-opacity-30'
                     : 'hover:bg-gray-600'
                 }`}
               >

@@ -7,9 +7,17 @@ export default function SubmissionsPage() {
   const navigate = useNavigate();
   const [submissions, setSubmissions] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [subjectId, setSubjectId] = useState(null);
 
   const user = JSON.parse(localStorage.getItem('user'));
   const userId = user?.userId;
+
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_API_URL}/api/exercises/${exerciseId}`)
+      .then(res => res.json())
+      .then(data => setSubjectId(data.subjectId));
+  }, [exerciseId]);
+
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/api/submissions/user/${userId}/exercise/${exerciseId}`)
@@ -46,7 +54,7 @@ export default function SubmissionsPage() {
             {submissions.map((sub, i) => (
               <div
                 key={sub.id}
-                onClick={() => navigate(`/results/${exerciseId}?submissionId=${sub.id}&maxPoints=${sub.maxPoints}`)}
+                onClick={() => navigate(`/results/${exerciseId}?submissionId=${sub.id}&maxPoints=${sub.maxPoints}&subjectId=${subjectId}`)}
                 className="bg-gray-700 rounded-lg border border-gray-600 p-5 cursor-pointer hover:bg-gray-600 transition"
               >
                 <div className="flex items-center justify-between">

@@ -61,7 +61,7 @@ export default function ExercisePage() {
     
     if (result.success) {
       localStorage.setItem('testResults', JSON.stringify(result));
-      navigate(`/results/${id}`);
+      navigate(`/results/${id}?subjectId=${exercise.subjectId}`);
     } else {
       setOutput(`✗ Submission failed:\n${result.error}`);
     }
