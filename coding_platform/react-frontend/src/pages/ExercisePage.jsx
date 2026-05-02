@@ -72,7 +72,7 @@ export default function ExercisePage() {
 
   return (
     <div className="min-h-screen bg-gray-800">
-      <Navbar title={exercise.title} showBack={true} backTo="/exercises" />
+      <Navbar title={exercise.title} showBack={true} backTo={`/exercises?subjectId=${exercise.subjectId}`}  />
 
       <div className="max-w-7xl mx-auto px-4 pb-8">
         <div className="grid grid-cols-2 gap-6">
