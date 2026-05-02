@@ -91,7 +91,7 @@ export default function ResultsPage() {
               <div className="mt-3 flex items-center gap-4">
                 <div className="px-4 py-2 rounded bg-yellow-900 border border-yellow-600">
                   <span className="text-yellow-400 font-bold text-xl">
-                    🏆 {summary.totalPoints} / {summary.maxPoints} points earned
+                    {summary.totalPoints} / {summary.maxPoints} points earned
                   </span>
                 </div>
               </div>
@@ -100,7 +100,6 @@ export default function ResultsPage() {
               summary.percentage >= 80 ? 'text-green-400' : 
               summary.percentage >= 50 ? 'text-yellow-400' : 'text-red-400'
             }`}>
-              {summary.percentage >= 80 ? '🎉' : summary.percentage >= 50 ? '👍' : '💪'}
             </div>
           </div>
 
@@ -151,7 +150,7 @@ export default function ResultsPage() {
         {/* Feedback Section */}
         {summary.percentage < 100 && (
           <div className="bg-gray-700 border border-gray-600 rounded-lg p-6 mt-6">
-            <h3 className="font-semibold text-white mb-3">💡 Tips for Improvement:</h3>
+            <h3 className="font-semibold text-white mb-3">Tips for Improvement:</h3>
             <ul className="space-y-2 text-gray-300 text-sm">
               <li>• Review the failed test cases and check your edge case handling</li>
               <li>• Make sure your output format exactly matches the expected output</li>
@@ -162,7 +161,7 @@ export default function ResultsPage() {
 
         {summary.percentage === 100 && (
           <div className="bg-green-900 bg-opacity-30 border border-green-600 rounded-lg p-6 mt-6">
-            <h3 className="font-semibold text-green-400 mb-3 text-xl">🎉 Perfect Score!</h3>
+            <h3 className="font-semibold text-green-400 mb-3 text-xl">Perfect Score!</h3>
             <p className="text-gray-300">
               Congratulations! You've passed all test cases. Ready for the next challenge?
             </p>
