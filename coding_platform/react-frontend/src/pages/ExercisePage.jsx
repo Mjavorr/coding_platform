@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from '../components/NavBar';
+import CodeMirror from '@uiw/react-codemirror';
+import { cpp } from '@codemirror/lang-cpp';
+import { oneDark } from '@codemirror/theme-one-dark';
 
 export default function ExercisePage() {
   const { id } = useParams();
@@ -9,6 +12,7 @@ export default function ExercisePage() {
   const [loading, setLoading] = useState(true);
   const [code, setCode] = useState('');
   const [output, setOutput] = useState('');
+
   
   const user = JSON.parse(localStorage.getItem('user'));
   const userId = user?.userId;
@@ -115,12 +119,14 @@ export default function ExercisePage() {
 
               {/* Code/Tests Editor */}
               <div className="p-4">
-                <textarea
-                  value={code}
-                  onChange={(e) => setCode(e.target.value)}
-                  className="w-full h-[500px] font-mono text-sm p-4 rounded bg-gray-900 text-green-400 border border-gray-600 focus:outline-none focus:border-blue-500 resize-y"
-                  placeholder="Write your solution here..."
-                />
+                <CodeMirror
+                value={code}
+                height="500px"
+                theme={oneDark}
+                extensions={[cpp()]}
+                onChange={(value) => setCode(value)}
+                className="rounded border border-gray-600"
+              />
               </div>
             </div>
 
