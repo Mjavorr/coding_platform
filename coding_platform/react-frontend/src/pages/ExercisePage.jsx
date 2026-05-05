@@ -99,7 +99,7 @@ export default function ExercisePage() {
                   .map((tc, i) => (
                     <div key={i} className="bg-gray-800 p-3 rounded border border-gray-600">
                       <div className="font-mono text-sm">
-                        <div className="text-gray-400">Input: <span className="text-blue-400">{tc.input}</span></div>
+                        <div className="text-gray-400">Input: <pre className="text-blue-400 font-mono whitespace-pre-wrap m-0 inline">{tc.input}</pre></div>
                         <div className="text-gray-400">Output: <span className="text-green-400">{tc.expectedOutput}</span></div>
                       </div>
                     </div>
